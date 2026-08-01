@@ -1,18 +1,17 @@
 package Controller;
 
-import View.MainForm;
-import com.formdev.flatlaf.FlatDarkLaf;
+import View.MainFrame;
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+
 import javax.swing.*;
 
 public class Main {
 
     public static void main(String[] args) {
-        // Apply FlatLaf Dark Theme
-        FlatDarkLaf.setup();
+        FlatMacDarkLaf.setup();
 
-        // Launch app directly
         SwingUtilities.invokeLater(() -> {
-            new MainForm().setVisible(true);
+            new MainFrame().setVisible(true);
         });
     }
 }

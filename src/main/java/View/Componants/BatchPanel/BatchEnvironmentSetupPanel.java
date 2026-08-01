@@ -1,15 +1,14 @@
-package View;
+package View.Componants.BatchPanel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-public class EnvironmentSetupPanel extends JPanel {
+public class BatchEnvironmentSetupPanel extends JPanel{
     private JComboBox<String> env_dropdown;
     private JRadioButton cbe_radio;
     private JRadioButton nbe_radio;
-
-    public EnvironmentSetupPanel() {
+    public BatchEnvironmentSetupPanel() {
         // Style
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(BorderFactory.createCompoundBorder(
