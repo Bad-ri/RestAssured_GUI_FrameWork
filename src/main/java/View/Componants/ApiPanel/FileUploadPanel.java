@@ -4,52 +4,73 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.File;
+import java.util.function.Consumer;
 
+/**
+ * class main functionality -> Building File upload panel component
+ * ┌─ File upload ───────────────┐
+ * │  Test data :   [ Upload ]   │
+ * │  Payload   :   [ Upload ]   │
+ * └─────────────────────────────┘
+ */
 public class FileUploadPanel extends JPanel {
     private JButton test_data_button;
     private JButton payload_button;
     private File test_data_file;
     private File payload_file;
-
+    private static final int MAX_NAME_LENGTH = 7;
     public FileUploadPanel() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createTitledBorder("File upload"),
                 new EmptyBorder(5, 5, 5, 5)
         ));
-
-        JPanel row1 = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 5));
-        row1.setAlignmentX(Component.LEFT_ALIGNMENT);
-        row1.add(new JLabel("Test data :"));
-        test_data_button = new JButton("Upload");
-        test_data_button.addActionListener(e -> {
-            JFileChooser chooser = new JFileChooser();
-            if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-                test_data_file = chooser.getSelectedFile();
-                test_data_button.setText(test_data_file.getName());
-            }
-        });
-        row1.add(test_data_button);
-        add(row1);
-
-        // Space between rows
+        test_data_button = createUploadButton();
+        payload_button = createUploadButton();
+        add(buildUploadRow("Test data :", test_data_button, file -> test_data_file = file));
         add(Box.createRigidArea(new Dimension(0, 5)));
-
-        JPanel row2 = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 5));
-        row2.setAlignmentX(Component.LEFT_ALIGNMENT);
-        row2.add(new JLabel("Payload :  "));
-        payload_button = new JButton("Upload");
-        payload_button.addActionListener(e -> {
-            JFileChooser chooser = new JFileChooser();
-            if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-                payload_file = chooser.getSelectedFile();
-                payload_button.setText(payload_file.getName());
+        add(buildUploadRow("Payload :", payload_button, file -> payload_file = file));
+    }
+    private JPanel buildUploadRow(String labelText, JButton button, Consumer<File> onFileSelected) {
+        JPanel row = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 5));
+        row.setAlignmentX(Component.LEFT_ALIGNMENT);
+        JLabel label = new JLabel(labelText);
+        label.setPreferredSize(new Dimension(70, 22));
+        row.add(label);
+        button.addActionListener(e -> {
+            File selected = chooseFile();
+            if (selected != null) {
+                onFileSelected.accept(selected);
+                setButtonFileText(button, selected);
             }
         });
-        row2.add(payload_button);
-        add(row2);
+        row.add(button);
+        return row;
     }
+    private JButton createUploadButton() {
+        JButton btn = new JButton("Upload");
+        btn.setPreferredSize(new Dimension(65, 22));
+        btn.setFont(btn.getFont().deriveFont(11f));
+        btn.setMargin(new Insets(2, 2, 2, 2));
+        return btn;
+    }
+    private void setButtonFileText(JButton button, File file) {
+        String fileName = file.getName();
+        button.setToolTipText(fileName); // Hovering still shows full file name
 
+        if (fileName.length() > MAX_NAME_LENGTH) {
+            button.setText(fileName.substring(0, MAX_NAME_LENGTH - 2) + "..");
+        } else {
+            button.setText(fileName);
+        }
+    }
+    private File chooseFile() {
+        JFileChooser chooser = new JFileChooser();
+        if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            return chooser.getSelectedFile();
+        }
+        return null;
+    }
     public File getTest_data_file() {
         return test_data_file;
     }

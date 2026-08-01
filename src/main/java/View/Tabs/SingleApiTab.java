@@ -1,12 +1,14 @@
-package View.Taps;
+package View.Tabs;
 
 import View.Componants.ApiPanel.APiSetupPanel;
 import View.Componants.ApiPanel.EnvironmentSetupPanel;
 import View.Componants.ApiPanel.FileUploadPanel;
-
 import javax.swing.*;
 import java.awt.*;
-
+/**
+ class main functionality -> GUI View tab builder.
+ 1 - assemble tab view (Single API)
+ */
 public class SingleApiTab extends JPanel{
     public SingleApiTab(EnvironmentSetupPanel environment_setup_panel, APiSetupPanel api_setup_panel, FileUploadPanel file_upload_panel) {
         JPanel center_top_container = new JPanel(new BorderLayout(10, 0));

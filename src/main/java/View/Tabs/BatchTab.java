@@ -1,14 +1,17 @@
-package View.Taps;
+package View.Tabs;
 
 import View.Componants.BatchPanel.BatchApiSetupPanel;
 import View.Componants.BatchPanel.BatchEnvironmentSetupPanel;
 import View.Componants.BatchPanel.BatchFileUploadPanel;
-
 import javax.swing.*;
 import java.awt.*;
 
-public class BatchTap extends JPanel{
-    public BatchTap(BatchEnvironmentSetupPanel batchEnvPanel, BatchApiSetupPanel batchApiPanel, BatchFileUploadPanel batchFilePanel) {
+/**
+ class main functionality -> GUI View Main builder.
+ 1 - assemble tab view (Batch Suite)
+ */
+public class BatchTab extends JPanel{
+    public BatchTab(BatchEnvironmentSetupPanel batchEnvPanel, BatchApiSetupPanel batchApiPanel, BatchFileUploadPanel batchFilePanel) {
         JPanel center_top_container = new JPanel(new BorderLayout(10, 0));
         center_top_container.add(batchEnvPanel, BorderLayout.WEST);
         center_top_container.add(batchApiPanel, BorderLayout.CENTER);

@@ -11,79 +11,83 @@ import View.Componants.HealthPanel.HealthApiSetupPanel;
 import View.Componants.HealthPanel.HealthResultPanel;
 import View.Componants.MainPanel.ActionPanel;
 import View.Componants.MainPanel.HeaderPanel;
-import View.Componants.MainPanel.HeaderTabPanel;
-import View.Componants.MainPanel.TestStatusPanel;
-import View.Taps.BatchTap;
-import View.Taps.HealthTap;
-import View.Taps.SingleApiTab;
-
+import View.Componants.MainPanel.TabPanel;
+import View.Componants.MainPanel.MetricsPanel;
+import View.Tabs.BatchTab;
+import View.Tabs.HealthTab;
+import View.Tabs.SingleApiTab;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+class main functionality -> GUI View Main builder.
+ 1 - assemble tab views (Single API, Batch Suite,Health & Sanity, Portal Validation)
+ 2 - assemble main frame (header, header taps and status/action bar)
+*/
 public class MainFrame extends JFrame {
-
-    private CardLayout centerCardLayout = new CardLayout();
-    private JPanel center_container = new JPanel(centerCardLayout);
-    private ActionPanel actionPanel;
-
+    private static final String TAB_SINGLE_API = "SINGLE_API";
+    private static final String TAB_BATCH_SUITE = "BATCH_SUITE";
+    private static final String TAB_HEALTH_SANITY = "HEALTH_SANITY";
+    private static final String TAB_PORTAL_VALIDATION = "PORTAL_VALIDATION";
+    private final CardLayout centerCardLayout = new CardLayout();
+    private final JPanel centerContainer = new JPanel(centerCardLayout);
+    private final ActionPanel actionPanel;
     public MainFrame() {
         setTitle("Automation Framework Runner");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout(10, 10));
-        // Initialize Header & Tabs
-        HeaderPanel header_panel = new HeaderPanel();
-        HeaderTabPanel header_tab_panel = new HeaderTabPanel();
+
+        HeaderPanel headerPanel = new HeaderPanel();
+        TabPanel headerTabPanel = new TabPanel();
+        MetricsPanel statusPanel = new MetricsPanel();
         EnvironmentSetupPanel envPanel = new EnvironmentSetupPanel();
         APiSetupPanel apiPanel = new APiSetupPanel();
         FileUploadPanel filePanel = new FileUploadPanel();
-        TestStatusPanel statusPanel = new TestStatusPanel();
         BatchEnvironmentSetupPanel batchEnvPanel = new BatchEnvironmentSetupPanel();
         BatchApiSetupPanel batchApiPanel = new BatchApiSetupPanel();
         BatchFileUploadPanel batchFilePanel = new BatchFileUploadPanel();
         HealthApiSetupPanel healthPanel = new HealthApiSetupPanel();
         HealthEnvSetupPanel healthApiPanel = new HealthEnvSetupPanel();
         HealthResultPanel healthResultPanel = new HealthResultPanel();
-        actionPanel = new ActionPanel(envPanel, apiPanel, filePanel, statusPanel, batchEnvPanel, batchApiPanel, batchFilePanel, healthPanel, healthApiPanel);
-
-        // Register Center Cards & Action Commands
-        setupTab(header_tab_panel.getSingleApiTab(), "SINGLE_API", new SingleApiTab(envPanel, apiPanel, filePanel));
-        setupTab(header_tab_panel.getBatchSuiteTab(), "BATCH_SUITE", new BatchTap(batchEnvPanel, batchApiPanel, batchFilePanel));
-        setupTab(header_tab_panel.getHealthSanityTab(), "HEALTH_SANITY", new HealthTap(healthPanel, healthResultPanel,healthApiPanel));
-        setupTab(header_tab_panel.getPortalValidationTab(), "PORTAL_VALIDATION", createPlaceholder("Portal Validation View"));
-
-        // 4. Top Container
-        JPanel top_container = new JPanel();
-        top_container.setLayout(new BoxLayout(top_container, BoxLayout.Y_AXIS));
-        top_container.add(header_panel);
-        top_container.add(header_tab_panel);
-        JPanel bottom_container = new JPanel();
-        bottom_container.setLayout(new BoxLayout(bottom_container, BoxLayout.Y_AXIS));
-        bottom_container.add(statusPanel);
-        bottom_container.add(Box.createRigidArea(new Dimension(0, 5)));
-        bottom_container.add(actionPanel);
-        add(top_container, BorderLayout.NORTH);
-        add(center_container, BorderLayout.CENTER);
-        add(bottom_container, BorderLayout.SOUTH);
-
+        // we pass the obj through constructor to use the same instance
+        actionPanel = new ActionPanel(envPanel, apiPanel, filePanel, statusPanel,
+                batchEnvPanel, batchApiPanel, batchFilePanel, healthPanel, healthApiPanel);
+        actionPanel.set_current_tap(TAB_SINGLE_API);
+        // creating window tabs
+        registerTab(headerTabPanel.getSingleApiTab(), TAB_SINGLE_API,
+                new SingleApiTab(envPanel, apiPanel, filePanel));
+        registerTab(headerTabPanel.getBatchSuiteTab(), TAB_BATCH_SUITE,
+                new BatchTab(batchEnvPanel, batchApiPanel, batchFilePanel));
+        registerTab(headerTabPanel.getHealthSanityTab(), TAB_HEALTH_SANITY,
+                new HealthTab(healthPanel, healthResultPanel, healthApiPanel));
+        registerTab(headerTabPanel.getPortalValidationTab(), TAB_PORTAL_VALIDATION,
+                placeholderPanel("Portal Validation View"));
+        JPanel topContainer = new JPanel();
+        topContainer.setLayout(new BoxLayout(topContainer, BoxLayout.Y_AXIS));
+        topContainer.add(headerPanel);
+        topContainer.add(headerTabPanel);
+        JPanel bottomContainer = new JPanel();
+        bottomContainer.setLayout(new BoxLayout(bottomContainer, BoxLayout.Y_AXIS));
+        bottomContainer.add(statusPanel);
+        bottomContainer.add(Box.createRigidArea(new Dimension(0, 5)));
+        bottomContainer.add(actionPanel);
+        add(topContainer, BorderLayout.NORTH);
+        add(centerContainer, BorderLayout.CENTER);
+        add(bottomContainer, BorderLayout.SOUTH);
         pack();
         setLocationRelativeTo(null);
     }
-
-    private void setupTab(JButton button, String cardKey, Component panel) {
-        center_container.add(panel, cardKey);
-        button.setActionCommand(cardKey);
-        actionPanel.set_current_tap("SINGLE_API");
-        button.addActionListener(e -> {
-            String selectedTab = e.getActionCommand();
-            centerCardLayout.show(center_container, selectedTab);
-            actionPanel.set_current_tap(selectedTab);
+    private void registerTab(JButton tabButton, String tabKey, Component panel) {
+        centerContainer.add(panel, tabKey);
+        tabButton.setActionCommand(tabKey);
+        tabButton.addActionListener(e -> {
+            centerCardLayout.show(centerContainer, e.getActionCommand());
+            actionPanel.set_current_tap(e.getActionCommand());
         });
     }
-
-    private JPanel createPlaceholder(String title) {
-        JPanel p = new JPanel(new GridBagLayout());
-        p.add(new JLabel("=== " + title + " ==="));
-        return p;
+    private JPanel placeholderPanel(String title) {
+        JPanel panel = new JPanel(new GridBagLayout());
+        panel.add(new JLabel("=== " + title + " ==="));
+        return panel;
     }
-
 }

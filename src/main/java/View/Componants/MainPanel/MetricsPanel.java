@@ -3,15 +3,22 @@ package View.Componants.MainPanel;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-
-public class TestStatusPanel extends JPanel {
+/**
+ * class main functionality -> Building Metrics panel component (test execution status)
+ * ┌─ Test Execution Status ────────────────────────────────────────┐
+ * │  Current scope   Progress   Passed   Failed   Duration         │
+ * │     N/A            0/0        0        0       00:00:00        │
+ * │  [|||||||||||||||||||||||||||||||||||||||||||||||||||||||]     │
+ * └────────────────────────────────────────────────────────────────┘
+ */
+public class MetricsPanel extends JPanel {
     private JLabel current_test_label;
     private JLabel progress_label;
     private JLabel passed_label;
     private JLabel failed_label;
     private JLabel duration_label;
     private JProgressBar progress_bar;
-    public TestStatusPanel() {
+    public MetricsPanel() {
         setLayout(new BorderLayout(0, 10));
         setMaximumSize(new Dimension(590, 90));
         setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -19,7 +26,9 @@ public class TestStatusPanel extends JPanel {
                 BorderFactory.createTitledBorder("Test Execution Status"),
                 new EmptyBorder(5, 5, 5, 5)
         ));
-
+        add(buildCardPanel(), BorderLayout.CENTER);
+    }
+    private JPanel buildCardPanel() {
         JPanel card_panel = new JPanel();
         card_panel.setLayout(new BoxLayout(card_panel, BoxLayout.Y_AXIS));
         JPanel metrics_panel = new JPanel(new GridLayout(1, 5, 10, 0));
@@ -33,7 +42,7 @@ public class TestStatusPanel extends JPanel {
         progress_bar = new JProgressBar(0, 100);
         progress_bar.setValue(0);
         card_panel.add(progress_bar);
-        add(card_panel, BorderLayout.CENTER);
+        return card_panel;
     }
     private JLabel createMetricLabel(String title, String defaultText, JPanel parent) {
         JPanel box = new JPanel();
@@ -58,5 +67,4 @@ public class TestStatusPanel extends JPanel {
         int percent = total > 0 ? (current * 100) / total : 0;
         progress_bar.setValue(percent);
     }
-
 }
