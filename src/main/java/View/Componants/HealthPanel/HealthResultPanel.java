@@ -18,12 +18,10 @@ public class HealthResultPanel extends JPanel {
                 new EmptyBorder(5, 10, 5, 10)
         ));
 
-        // Create status rows
-        fundStatus    = createStatusLabel("Fund:", "Working", true);
-        authStatus    = createStatusLabel("Auth:", "Working", true);
-        historyStatus = createStatusLabel("History:", "Not Working", false);
+        fundStatus    = createStatusLabel("Fund:", "UP", true);
+        authStatus    = createStatusLabel("Auth:", "UP", true);
+        historyStatus = createStatusLabel("History:", "Down", false);
         overallStatus = createStatusLabel("Overall:", "Issues Found", false);
-
         add(fundStatus);
         add(authStatus);
         add(historyStatus);
@@ -42,12 +40,10 @@ public class HealthResultPanel extends JPanel {
         return String.format("<span style='color: %s; font-weight: bold;'>%s</span>", color, text);
     }
 
-    // Method to dynamically update results later from your execution runner
     public void updateResults(boolean fund, boolean auth, boolean history) {
         fundStatus.setText("<html><b>Fund:</b> " + formatBadge(fund ? "Working" : "Not Working", fund) + "</html>");
         authStatus.setText("<html><b>Auth:</b> " + formatBadge(auth ? "Working" : "Not Working", auth) + "</html>");
         historyStatus.setText("<html><b>History:</b> " + formatBadge(history ? "Working" : "Not Working", history) + "</html>");
-
         boolean allOk = fund && auth && history;
         overallStatus.setText("<html><b>Overall:</b> " + formatBadge(allOk ? "All OK" : "Issues Found", allOk) + "</html>");
     }

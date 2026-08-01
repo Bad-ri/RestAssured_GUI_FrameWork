@@ -35,7 +35,7 @@ public class BatchFileUploadPanel extends JPanel{
         add(Box.createRigidArea(new Dimension(0, 5)));
         JPanel module_panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 5));
         module_panel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        payload_radio = new JRadioButton("Payload");
+        payload_radio = new JRadioButton("Payload",true);
         data_radio = new JRadioButton("Data");
         ButtonGroup bank_group = new ButtonGroup();
         bank_group.add(payload_radio);

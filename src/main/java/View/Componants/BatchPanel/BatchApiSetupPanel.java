@@ -30,7 +30,7 @@ public class BatchApiSetupPanel extends JPanel{
         JPanel module_panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 5));
         module_panel.setAlignmentX(Component.LEFT_ALIGNMENT);
         //module_panel.add(new JLabel("Module :"));
-        Sequential_radio = new JRadioButton("Sequential");
+        Sequential_radio = new JRadioButton("Sequential",true);
         FireForget_radio = new JRadioButton("FireForget");
         ButtonGroup bank_group = new ButtonGroup();
         bank_group.add(Sequential_radio);

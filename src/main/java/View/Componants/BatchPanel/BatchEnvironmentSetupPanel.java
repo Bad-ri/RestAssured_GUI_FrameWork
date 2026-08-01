@@ -30,7 +30,7 @@ public class BatchEnvironmentSetupPanel extends JPanel{
         bank_panel.setAlignmentX(Component.LEFT_ALIGNMENT);
         bank_panel.add(new JLabel("Bank :"));
         cbe_radio = new JRadioButton("CBE");
-        nbe_radio = new JRadioButton("NBE");
+        nbe_radio = new JRadioButton("NBE",true);
         ButtonGroup bank_group = new ButtonGroup();
         bank_group.add(cbe_radio);
         bank_group.add(nbe_radio);

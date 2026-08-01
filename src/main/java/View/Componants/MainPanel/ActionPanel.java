@@ -1,8 +1,14 @@
 package View.Componants.MainPanel;
 
+import Controller.MainController;
 import View.Componants.ApiPanel.APiSetupPanel;
 import View.Componants.ApiPanel.EnvironmentSetupPanel;
 import View.Componants.ApiPanel.FileUploadPanel;
+import View.Componants.BatchPanel.BatchApiSetupPanel;
+import View.Componants.BatchPanel.BatchEnvironmentSetupPanel;
+import View.Componants.BatchPanel.BatchFileUploadPanel;
+import View.Componants.HealthPanel.HealthEnvSetupPanel;
+import View.Componants.HealthPanel.HealthApiSetupPanel;
 import com.formdev.flatlaf.FlatClientProperties;
 
 import javax.swing.*;
@@ -18,31 +24,41 @@ public class ActionPanel extends JPanel {
     private APiSetupPanel api_setup_panel;
     private FileUploadPanel file_upload_panel;
     private TestStatusPanel status_panel;
-    public ActionPanel(EnvironmentSetupPanel environmentSetupPanel, APiSetupPanel api_setup_panel, FileUploadPanel file_upload_panel, TestStatusPanel status_panel) {
+    private String current_tap_selected;
+    private MainController controller;
+    private BatchEnvironmentSetupPanel batch_env_panel;
+    private BatchApiSetupPanel batch_api_setup;
+    private BatchFileUploadPanel batch_file;
+    private HealthEnvSetupPanel health_env_panel;
+    private HealthApiSetupPanel health_api_setup;
+
+    public ActionPanel(EnvironmentSetupPanel environmentSetupPanel, APiSetupPanel api_setup_panel, FileUploadPanel file_upload_panel, TestStatusPanel status_panel, BatchEnvironmentSetupPanel batchEnvPanel, BatchApiSetupPanel batchApiPanel, BatchFileUploadPanel batchFilePanel, HealthApiSetupPanel healthApiSetupPanel, HealthEnvSetupPanel healthEnvPanel) {
+        controller = new MainController();
         this.environment_setup_panel = environmentSetupPanel;
         this.api_setup_panel = api_setup_panel;
         this.file_upload_panel = file_upload_panel;
         this.status_panel = status_panel;
+        this.batch_env_panel = batchEnvPanel;
+        this.batch_api_setup = batchApiPanel;
+        this.batch_file = batchFilePanel;
+        this.health_env_panel = healthEnvPanel;
+        this.health_api_setup = healthApiSetupPanel;
 
         setLayout(new BorderLayout(0, 10));
         setMaximumSize(new Dimension(590, 90));
-        setAlignmentX(Component.CENTER_ALIGNMENT); // Prevents 100% width stretching
-
+        setAlignmentX(Component.CENTER_ALIGNMENT);
         setBorder(BorderFactory.createCompoundBorder(
-                new EmptyBorder(0, 0, 15, 0), // 15px bottom spacing
+                new EmptyBorder(0, 0, 15, 0),
                 BorderFactory.createCompoundBorder(
                         BorderFactory.createTitledBorder("Actions"),
                         new EmptyBorder(5, 5, 5, 5)
                 )
         ));
-        // Left Controls
         JPanel left_controls = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
         export_report_btn = new JButton("Export report");
         export_db_btn = new JButton("Export from DB");
         left_controls.add(export_report_btn);
         left_controls.add(export_db_btn);
-
-        // Right Controls
         JPanel right_controls = new JPanel(new FlowLayout(FlowLayout.RIGHT, 5, 0));
         pause_btn = new JButton("Pause");
         execute_btn = new JButton("Execute");
@@ -53,10 +69,14 @@ public class ActionPanel extends JPanel {
         pause_btn.addActionListener(e -> {
             takeAction("pause");
         });
-
+        export_report_btn.addActionListener(e -> {
+            takeAction("case_report");
+        });
+        export_db_btn.addActionListener(e -> {
+            takeAction("db_report");
+        });
         right_controls.add(pause_btn);
         right_controls.add(execute_btn);
-
         add(left_controls, BorderLayout.WEST);
         add(right_controls, BorderLayout.EAST);
     }
@@ -64,12 +84,54 @@ public class ActionPanel extends JPanel {
         switch (action)
         {
             case "execute":
-                status_panel.updateProgress(5,10,2,3,"Fund","1:00:00");
+                AbstractData();
                 break;
             case "pause":
                 status_panel.updateProgress(10,10,0,10,"Fund","00:00:00");
                 break;
+            case "case_report":
+                status_panel.updateProgress(10,10,0,11,"Fund","00:00:00");
+                break;
+            case "db_report":
+                status_panel.updateProgress(10,10,0,12,"Fund","00:00:00");
+                break;
             default:
         }
+    }
+    public void AbstractData(){
+        switch (current_tap_selected)
+        {
+            case "SINGLE_API":
+                controller.single_api_session(
+                        environment_setup_panel.getSelectedEnvironment(),
+                        environment_setup_panel.getSelectedBank(),
+                        api_setup_panel.getSelectedApi(),
+                        api_setup_panel.getSelectedModule(),
+                        file_upload_panel.getTest_data_file(),
+                        file_upload_panel.getPayload_file()
+                );
+                break;
+            case "BATCH_SUITE":
+                controller.batch_api_session(
+                        batch_env_panel.getSelectedEnvironment(),
+                        batch_env_panel.getSelectedBank(),
+                        batch_api_setup.getSelectedApi(),
+                        batch_api_setup.getSelectedModule(),
+                        batch_file.getTest_data_file(),
+                        batch_file.getSelectedModule()
+                );
+                break;
+            case "HEALTH_SANITY":
+                controller.health_session(
+                        health_env_panel.getSelectedEnvironment(),
+                        health_env_panel.getSelectedBank(),
+                        health_api_setup.getSelectedApi()
+                );
+                break;
+            default:
+        }
+    }
+    public void set_current_tap(String current_tap){
+        this.current_tap_selected = current_tap;
     }
 }

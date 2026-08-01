@@ -38,14 +38,8 @@ public class HeaderTabPanel extends JPanel {
 
         btn.addActionListener(e -> {
             setActiveTab(btn);
-            onTabClicked(btn.getText());
         });
-
         return btn;
-    }
-
-    private void onTabClicked(String buttonTitle) {
-        System.out.println("Tab clicked: " + buttonTitle);
     }
 
     public void setActiveTab(JButton selectedBtn) {

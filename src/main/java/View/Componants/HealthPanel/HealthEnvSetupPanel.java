@@ -1,15 +1,15 @@
-package View.Componants.ApiPanel;
+package View.Componants.HealthPanel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-public class EnvironmentSetupPanel extends JPanel {
+public class HealthEnvSetupPanel extends JPanel{
     private JComboBox<String> env_dropdown;
     private JRadioButton cbe_radio;
     private JRadioButton nbe_radio;
 
-    public EnvironmentSetupPanel() {
+    public HealthEnvSetupPanel() {
         // Style
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(BorderFactory.createCompoundBorder(

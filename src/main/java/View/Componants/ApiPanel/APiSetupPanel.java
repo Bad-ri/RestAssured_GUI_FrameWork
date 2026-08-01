@@ -30,7 +30,7 @@ public class APiSetupPanel extends JPanel{
         JPanel module_panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 5));
         module_panel.setAlignmentX(Component.LEFT_ALIGNMENT);
         //module_panel.add(new JLabel("Module :"));
-        sanity_radio = new JRadioButton("Sanity");
+        sanity_radio = new JRadioButton("Sanity",true);
         regression_radio = new JRadioButton("Regression");
         ButtonGroup bank_group = new ButtonGroup();
         bank_group.add(sanity_radio);
