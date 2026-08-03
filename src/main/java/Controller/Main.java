@@ -5,7 +5,7 @@ import View.MainFrame;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import javax.swing.*;
 public class Main {
-    private static final int SPLASH_DURATION_MS = 2500;
+    private static final int SPLASH_DURATION_MS = 2200;
 
     public static void main(String[] args) {
         FlatMacDarkLaf.setup();
