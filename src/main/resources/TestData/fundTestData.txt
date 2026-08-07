@@ -1,0 +1,18 @@
+{
+  "validItemOne": {
+    "id": "1",
+    "title": "NewItem1",
+    "price": "10",
+    "description": "NewItemDescription",
+    "category": "NewItemCategory",
+    "image": "NewItemImage"
+  },
+"validItemTwo": {
+    "id": "2",
+    "title": "NewItem2",
+    "price": "20",
+    "description": "NewItemDescription",
+    "category": "NewItemCategory",
+    "image": "NewItemImage"
+  }
+}

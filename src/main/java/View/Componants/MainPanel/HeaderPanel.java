@@ -26,7 +26,7 @@ public class HeaderPanel extends JPanel {
     }
     private JPanel buildLeftContainer() {
         JPanel left_container = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
-        ImageIcon originalIcon = new ImageIcon(getClass().getResource("/assets/nbe_logo.png"));
+        ImageIcon originalIcon = new ImageIcon(getClass().getResource("/Assets/nbe_logo.png"));
         Image scaledImage = originalIcon.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH);
         ImageIcon resizedIcon = new ImageIcon(scaledImage);
         JLabel icon_label = new JLabel(resizedIcon);

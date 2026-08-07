@@ -1,0 +1,10 @@
+{
+  "caseOne": {
+    "title": "Add new item one",
+    "data": "validItemOne"
+  },
+  "caseTwo": {
+    "title": "Add new item two",
+    "data": "validItemTwo"
+  }
+}

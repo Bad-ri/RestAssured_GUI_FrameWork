@@ -5,7 +5,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.net.URL;
 public class SplashScreen extends JWindow {
-    private static final String LOGO_PATH = "/assets/nbe_logo.png";
+    private static final String LOGO_PATH = "/Assets/nbe_logo.png";
     private static final String FALLBACK_TEXT = "NBE";
     public SplashScreen() {
         setContentPane(buildContentPanel());
