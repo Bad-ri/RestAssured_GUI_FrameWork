@@ -1,4 +1,4 @@
-package Controller;
+package Starter;
 
 import View.MainFrame;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;

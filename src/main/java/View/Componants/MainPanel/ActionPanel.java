@@ -1,6 +1,6 @@
 package View.Componants.MainPanel;
 
-import Controller.MainController;
+import Controller.Controller;
 import View.Componants.ApiPanel.APiSetupPanel;
 import View.Componants.ApiPanel.EnvironmentSetupPanel;
 import View.Componants.ApiPanel.FileUploadPanel;
@@ -30,14 +30,15 @@ public class ActionPanel extends JPanel {
     private FileUploadPanel file_upload_panel;
     private MetricsPanel status_panel;
     private String current_tap_selected;
-    private MainController controller;
+    private Controller controller;
     private BatchEnvironmentSetupPanel batch_env_panel;
     private BatchApiSetupPanel batch_api_setup;
     private BatchFileUploadPanel batch_file;
     private HealthEnvSetupPanel health_env_panel;
     private HealthApiSetupPanel health_api_setup;
+
     public ActionPanel(EnvironmentSetupPanel environmentSetupPanel, APiSetupPanel api_setup_panel, FileUploadPanel file_upload_panel, MetricsPanel status_panel, BatchEnvironmentSetupPanel batchEnvPanel, BatchApiSetupPanel batchApiPanel, BatchFileUploadPanel batchFilePanel, HealthApiSetupPanel healthApiSetupPanel, HealthEnvSetupPanel healthEnvPanel) {
-        controller = new MainController();
+        controller = new Controller();
         this.environment_setup_panel = environmentSetupPanel;
         this.api_setup_panel = api_setup_panel;
         this.file_upload_panel = file_upload_panel;
