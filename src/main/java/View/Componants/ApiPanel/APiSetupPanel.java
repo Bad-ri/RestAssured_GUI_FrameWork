@@ -12,7 +12,7 @@ import java.awt.*;
  * └──────────────────────────────────────┘
  */
 public class APiSetupPanel extends JPanel{
-    private static final String[] API_OPTIONS = {"Fund", "Auth", "AccHistory", "All"};
+    private static final String[] API_OPTIONS = {"Fund", "Auth", "AccHistory"};
     private static final String SANITY = "Sanity";
     private static final String REGRESSION = "Regression";
     private JComboBox<String> api_dropdown;

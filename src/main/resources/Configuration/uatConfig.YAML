@@ -1,0 +1,10 @@
+nbe:
+  fund_url: "https://uatfakestoreapi.com/products"
+  acchistory_url: "https://uataccfakestoreapi.com/products"
+  auth_url: "https://uatauthfakestoreapi.com/products"
+  list_url: "https://uatlistfakestoreapi.com/products"
+cbe:
+  fund_url: "https://uatcbefakestoreapi.com/products"
+  acchistory_url: "https://uatcbeaccfakestoreapi.com/products"
+  auth_url: "https://uatcbeauthfakestoreapi.com/products"
+  list_url: "https://uatcbelistfakestoreapi.com/products"

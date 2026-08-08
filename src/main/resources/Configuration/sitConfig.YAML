@@ -1,0 +1,10 @@
+nbe:
+  fund_url: "https://fakestoreapi.com/products"
+  acchistory_url: "https://accfakestoreapi.com/products"
+  auth_url: "https://authfakestoreapi.com/products"
+  list_url: "https://listfakestoreapi.com/products"
+cbe:
+  fund_url: "https://cbefakestoreapi.com/products"
+  acchistory_url: "https://cbeaccfakestoreapi.com/products"
+  auth_url: "https://cbeauthfakestoreapi.com/products"
+  list_url: "https://cbelistfakestoreapi.com/products"
