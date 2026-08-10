@@ -1,0 +1,12 @@
+  - id: "TC01"
+    title: "NBE-Sanity-FUND"
+    debit_data_ref: "valid_nbe_account"
+    credit_data_ref: "valid_nbe_account"
+    expected_status: 00000
+    expected_code: "SUCCESS"
+  - id: "TC02"
+    title: "NBE-Sanity-FUND"
+    debit_data_ref: "invalid_nbe_account"
+    credit_data_ref: "valid_nbe_account"
+    expected_status: 10000
+    expected_code: "Restricted"

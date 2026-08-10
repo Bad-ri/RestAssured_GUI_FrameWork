@@ -1,0 +1,12 @@
+  - id: "TC01"
+    title: "CBE-Sanity-ACCHISTORY"
+    debit_data_ref: "valid_CBE_account"
+    credit_data_ref: "valid_CBE_account"
+    expected_status: 00000
+    expected_code: "SUCCESS"
+  - id: "TC02"
+    title: "CBE-Sanity-ACCHISTORY"
+    debit_data_ref: "invalid_CBE_account"
+    credit_data_ref: "valid_CBE_account"
+    expected_status: 10000
+    expected_code: "Restricted"
