@@ -1,6 +1,7 @@
 package Engine;
 
 import Helper.ConfigProvider.ConfigManager;
+import Helper.DataProvider.TestDataManager;
 import Helper.TestCaseProvider.TestCasesManager;
 
 import java.io.File;
@@ -22,6 +23,13 @@ public class SingleExecuter {
         ConfigManager configManager = new ConfigManager(selectedBank, selectedEnvironment, selectedApi);
         System.out.println(configManager.getUrl());
         System.out.println("==================================================");
+        
+        String selected_data = "valid_nbe_account";
+        TestDataManager test_data_manager = new TestDataManager(selectedBank,selected_data);
+        System.out.println("Account Number: " + test_data_manager.get("account_number"));
+        System.out.println("Card Number: " + test_data_manager.get("card_number"));
+        System.out.println("==================================================");
+
         TestCasesManager manager = new TestCasesManager(selectedBank, selectedModule, selectedApi);
         List<Map<String, Object>> testCases = manager.getTestCases();
         for (int i = 0; i < testCases.size(); i++) {
