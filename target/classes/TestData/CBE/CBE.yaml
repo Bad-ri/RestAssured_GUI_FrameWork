@@ -1,6 +1,6 @@
-  valid_CBE_account:
-    account_number: "1234567890"
-    card_number: "4111222233334444"
+  valid_cbe_account:
+    account_number: "123"
+    card_number: "456"
 
   invalid_CBE_account:
     account_number: "9999000011"

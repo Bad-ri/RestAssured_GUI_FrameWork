@@ -12,15 +12,12 @@ public class TestCasesManager {
     private final List<Map<String, Object>> testCases;
     private Yaml yaml = new Yaml();
     private String config_path;
-    private String bank;
-    private String api;
-    private String module;
 
-    public TestCasesManager(String bank, String module, String api) {
-        this.bank = bank.toUpperCase();
-        this.api = api.toUpperCase();
-        this.module = module.toUpperCase();
-        setConfig_path(bank, api, module);
+    public TestCasesManager(String bank, String module, String api, boolean isTestCaseFile) {
+        if (isTestCaseFile) {
+            this.config_path = "src/main/resources/TestCase/Upload/temp_cases.yaml";
+        }else
+            setConfig_path(bank.toUpperCase(), api.toUpperCase(), module.toUpperCase());
         try (InputStream inputStream = new FileInputStream(config_path)) {
             this.testCases = yaml.load(inputStream);
         } catch (Exception e) {

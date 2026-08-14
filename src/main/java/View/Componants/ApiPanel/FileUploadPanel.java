@@ -29,7 +29,7 @@ public class FileUploadPanel extends JPanel {
         payload_button = createUploadButton();
         add(buildUploadRow("Test data :", test_data_button, file -> test_data_file = file));
         add(Box.createRigidArea(new Dimension(0, 5)));
-        add(buildUploadRow("Payload :", payload_button, file -> payload_file = file));
+        add(buildUploadRow("Test Case :", payload_button, file -> payload_file = file));
     }
     private JPanel buildUploadRow(String labelText, JButton button, Consumer<File> onFileSelected) {
         JPanel row = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 5));
@@ -71,6 +71,17 @@ public class FileUploadPanel extends JPanel {
         }
         return null;
     }
+    public void clearUploadButton() {
+        this.test_data_file = null;
+        this.payload_file = null;
+        this.test_data_button.setText("Upload");
+        this.test_data_button.setToolTipText(null);
+        this.payload_button.setText("Upload");
+        this.payload_button.setToolTipText(null);
+        revalidate();
+        repaint();
+    }
+
     public File getTest_data_file() {
         return test_data_file;
     }

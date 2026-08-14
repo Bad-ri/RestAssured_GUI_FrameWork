@@ -82,6 +82,13 @@ public class BatchFileUploadPanel extends JPanel {
         }
         return null;
     }
+    public void clearUploadButton() {
+        this.test_data_file = null;
+        this.test_data_button.setText("Upload");
+        this.test_data_button.setToolTipText(null);
+        revalidate();
+        repaint();
+    }
     public File getTest_data_file() {
         return test_data_file;
     }

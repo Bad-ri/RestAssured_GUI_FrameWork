@@ -1,6 +1,6 @@
   valid_nbe_account:
-    account_number: "1234567890"
-    card_number: "4111222233334444"
+    account_number: "789"
+    card_number: "101"
 
   invalid_NBE_account:
     account_number: "9999000011"

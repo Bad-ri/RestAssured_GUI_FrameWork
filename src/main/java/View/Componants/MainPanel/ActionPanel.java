@@ -111,6 +111,7 @@ public class ActionPanel extends JPanel {
                         file_upload_panel.getTest_data_file(),
                         file_upload_panel.getPayload_file()
                 );
+                file_upload_panel.clearUploadButton();
                 break;
             case "BATCH_SUITE":
                 controller.batch_api_session(
@@ -121,6 +122,7 @@ public class ActionPanel extends JPanel {
                         batch_file.getTest_data_file(),
                         batch_file.getSelectedModule()
                 );
+                batch_file.clearUploadButton();
                 break;
             case "HEALTH_SANITY":
                 controller.health_session(
