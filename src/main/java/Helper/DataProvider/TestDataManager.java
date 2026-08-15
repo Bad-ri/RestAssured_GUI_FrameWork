@@ -19,7 +19,10 @@ public class TestDataManager {
             setConfig_path(bank.toUpperCase());
         try (InputStream inputStream = new FileInputStream(config_path)) {
             Map<String, Map<String, String>> allData = yaml.load(inputStream);
-            this.test_data = allData.get(selected_data);
+            if(allData.get(selected_data) == null){
+                System.out.println(selected_data + " not found in test case file");
+            }else
+                this.test_data = allData.get(selected_data);
         } catch (Exception e) {
             throw new RuntimeException("Error loading test data from: " + config_path, e);
         }

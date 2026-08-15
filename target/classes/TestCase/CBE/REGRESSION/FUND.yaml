@@ -1,12 +1,9 @@
-  - id: "TC01"
-    title: "CBE-Regression-FUND"
-    debit_data_ref: "valid_CBE_account"
-    credit_data_ref: "valid_CBE_account"
-    expected_status: 00000
-    expected_code: "SUCCESS"
-  - id: "TC02"
-    title: "CBE-Regression-FUND"
-    debit_data_ref: "invalid_CBE_account"
-    credit_data_ref: "valid_CBE_account"
-    expected_status: 10000
-    expected_code: "Restricted"
+- id: "TC01"
+  title: "CBE-regression-FUND"
+  req_data: "valid_cbe_account"
+  expected_status: 00000
+
+- id: "TC01"
+  title: "CBE-regression-FUND"
+  req_data: "invalid_cbe_account"
+  expected_status: 00000

@@ -1,7 +1,7 @@
   valid_cbe_account:
-    account_number: "123"
-    card_number: "456"
+    title: "cbeValidAccount"
+    description: "CCCBBBEEE-valid-notUploaded"
 
-  invalid_CBE_account:
-    account_number: "9999000011"
-    card_number: "4000000000000000"
+  invalid_cbe_account:
+    title: "cbeInValidAccount"
+    description: "CCCBBBEEE-invalid-notUploaded"

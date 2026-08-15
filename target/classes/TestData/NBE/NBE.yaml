@@ -1,7 +1,6 @@
   valid_nbe_account:
-    account_number: "789"
-    card_number: "101"
-
-  invalid_NBE_account:
-    account_number: "9999000011"
-    card_number: "4000000000000000"
+    title: "nbeValidAccount"
+    description: "NNNBBBEEE-valid-notUploaded"
+  invalid_nbe_account:
+    title: "nbeInValidAccount"
+    description: "NNNBBBEEE-invalid-notUploaded"

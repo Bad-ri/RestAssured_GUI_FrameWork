@@ -1,0 +1,8 @@
+{
+  "id": 2,
+  "title": "${title}",
+  "price": 0.1,
+  "description": "${description}",
+  "category": "string",
+  "image": "http://example.com"
+}
