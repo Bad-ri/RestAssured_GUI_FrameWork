@@ -5,7 +5,6 @@ import Helper.DataProvider.TestDataManager;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -22,7 +21,6 @@ public class SpecBuilderManager {
                 .setBaseUri(configManager.getUrl())
                 .setContentType(ContentType.JSON)
                 .setAccept(ContentType.JSON)
-                .addHeader("Accept", "*/*")
                 .addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)")
                 .addHeader("Connection", "keep-alive")
                 .setBody(getPayload(api, test_data))
@@ -50,4 +48,12 @@ public class SpecBuilderManager {
         return test_data_map.get("description");
     }
 
+
+    private String resolvePlaceholders(String template, Map<String, String> data) {
+        String result = template;
+        for (Map.Entry<String, String> entry : data.entrySet()) {
+            result = result.replace("${" + entry.getKey() + "}", entry.getValue());
+        }
+        return result;
+    }
 }

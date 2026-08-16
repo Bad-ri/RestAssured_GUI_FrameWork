@@ -1,0 +1,7 @@
+  valid_nbe_account:
+    account_number: "uploadetestdata"
+    card_number: "101"
+
+  invalid_NBE_account:
+    account_number: "9999000011"
+    card_number: "4000000000000000"

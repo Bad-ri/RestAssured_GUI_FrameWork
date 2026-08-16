@@ -1,6 +1,7 @@
 package View.Componants.MainPanel;
 
 import Controller.Controller;
+import Helper.CurrentSession;
 import View.Componants.ApiPanel.APiSetupPanel;
 import View.Componants.ApiPanel.EnvironmentSetupPanel;
 import View.Componants.ApiPanel.FileUploadPanel;
@@ -103,6 +104,16 @@ public class ActionPanel extends JPanel {
     public void AbstractData() {
         switch (current_tap_selected) {
             case "SINGLE_API":
+                CurrentSession.SESSION.set(
+                        environment_setup_panel.getSelectedBank(),
+                        environment_setup_panel.getSelectedEnvironment(),
+                        api_setup_panel.getSelectedApi(),
+                        api_setup_panel.getSelectedModule(),
+                        file_upload_panel.getTest_data_file() != null && file_upload_panel.getTest_data_file().exists(),
+                        file_upload_panel.getPayload_file() != null && file_upload_panel.getPayload_file().exists(),
+                        file_upload_panel.getTest_data_file(),
+                        file_upload_panel.getPayload_file()
+                );
                 controller.single_api_session(
                         environment_setup_panel.getSelectedEnvironment(),
                         environment_setup_panel.getSelectedBank(),
