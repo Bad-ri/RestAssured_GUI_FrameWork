@@ -1,37 +1,48 @@
 package Helper.ConfigProvider;
 
+import Helper.CurrentSession;
 import org.yaml.snakeyaml.Yaml;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Map;
-import java.util.Properties;
+
+/**
+ * Loads the YAML configuration then provides the API URL
+ */
 
 public class ConfigManager {
-    private Yaml yaml = new Yaml();
-    private String config_path;
-    private String bank;
-    private String api;
-    private Map<String, Map<String, String>> environment_map;
+    private final CurrentSession currentSession = CurrentSession.SESSION;
+    private final Map<String, Map<String, String>> environmentMap;
+    private String configPath;
 
-    public ConfigManager(String bank, String environment,  String api) {
-        this.bank = bank.toLowerCase();
-        this.api = api.toLowerCase() + "_url";
-        setConfig_path(environment);
-        try (InputStream inputStream = new FileInputStream(config_path)) {
-            environment_map = yaml.load(inputStream);
+    public ConfigManager() {
+        setConfig_path();
+        environmentMap = loadConfiguration();
+    }
+
+    public void setConfig_path() {
+        configPath = "src/main/resources/Configuration/"
+                + currentSession.getEnvironment().toLowerCase() + "Config.YAML";
+    }
+
+    private Map<String, Map<String, String>> loadConfiguration() {
+        try (InputStream inputStream = new FileInputStream(configPath)) {
+            return new Yaml().load(inputStream);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
-
-    public void setConfig_path(String environment) {
-        this.config_path = "src/main/resources/Configuration/" + environment.toLowerCase() + "Config.YAML";
-    }
-
-    public String getUrl() {
-        if(api.equals("auth_url")) {
-            return environment_map.get(bank).get(api).concat("||"+environment_map.get(bank).get("list_url"));
+    /**
+     * return API URL
+     */
+    public String getApiUrl() {
+        Map<String, String> bankConfiguration = environmentMap.get(currentSession.getBank().toLowerCase());
+        String api = currentSession.getApi().toLowerCase();
+        String apiUrl = bankConfiguration.get(api + "_url");
+        if (api.toLowerCase().equals("auth")) {
+            return apiUrl.concat("||" + bankConfiguration.get("list_url"));
         }
-        return environment_map.get(bank).get(api);
+        return apiUrl;
     }
+
 }

@@ -114,15 +114,8 @@ public class ActionPanel extends JPanel {
                         file_upload_panel.getTest_data_file(),
                         file_upload_panel.getPayload_file()
                 );
-                controller.single_api_session(
-                        environment_setup_panel.getSelectedEnvironment(),
-                        environment_setup_panel.getSelectedBank(),
-                        api_setup_panel.getSelectedApi(),
-                        api_setup_panel.getSelectedModule(),
-                        file_upload_panel.getTest_data_file(),
-                        file_upload_panel.getPayload_file()
-                );
                 file_upload_panel.clearUploadButton();
+                controller.single_api_session();
                 break;
             case "BATCH_SUITE":
                 controller.batch_api_session(

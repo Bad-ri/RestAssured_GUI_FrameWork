@@ -1,46 +1,47 @@
 package Helper.FileManager;
 
+import Helper.CurrentSession;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 
+/**
+ * Save uploaded file & delete old files
+ */
 public class FileManager {
-    public FileManager(boolean isTestDataFile, boolean isTestCaseFile, File testDataFile, File payloadFile) {
-        this.deleteUploadedFiles();
-        if(isTestDataFile && isTestCaseFile) {
-            saveYamlToResources(testDataFile, "temp_data.yaml", isTestDataFile, false);
-            saveYamlToResources(payloadFile, "temp_cases.yaml", false, isTestCaseFile);
-        }else if(isTestDataFile && isTestCaseFile == false) {
-            saveYamlToResources(testDataFile,"temp_data.yaml", isTestDataFile, isTestCaseFile);
-        }else if(isTestDataFile == false && isTestCaseFile) {
-            saveYamlToResources(payloadFile, "temp_cases.yaml", isTestDataFile, isTestCaseFile);
+    private final CurrentSession session = CurrentSession.SESSION;
+    private static final Path TEST_DATA_UPLOAD_DIRECTORY =
+            Path.of("src", "main", "resources", "TestData", "Upload");
+    private static final Path TEST_CASE_UPLOAD_DIRECTORY =
+            Path.of("src", "main", "resources", "TestCase", "Upload");
+    private static final Path TEST_DATA_FILE_PATH =
+            TEST_DATA_UPLOAD_DIRECTORY.resolve("temp_data.yaml");
+    private static final Path TEST_CASE_FILE_PATH =
+            TEST_CASE_UPLOAD_DIRECTORY.resolve("temp_cases.yaml");
+
+    public FileManager() {
+        deleteUploadedFiles();
+        if (session.hasTestDataFile()) {
+            saveYamlToResources(session.getTestDataFile(), TEST_DATA_FILE_PATH);
+        }
+        if (session.hasTestCaseFile()) {
+            saveYamlToResources(session.getTestCaseFile(), TEST_CASE_FILE_PATH);
         }
     }
-    private void saveYamlToResources(File sourceFile, String targetFileName, boolean isTestDataFile, boolean isTestCaseFile) {
-        try  {
-            Path targetDir = null;
-            if (isTestDataFile) {
-                targetDir = Path.of("src", "main", "resources", "TestData","Upload");
-            }else if(isTestCaseFile)
-                targetDir = Path.of("src", "main", "resources", "TestCase","Upload");
-            // Step C: Copy the uploaded file to target location
-            Path destination = targetDir.resolve(targetFileName);
+    private void saveYamlToResources(File sourceFile, Path destination) {
+        try {
             Files.copy(sourceFile.toPath(), destination, StandardCopyOption.REPLACE_EXISTING);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
     public void deleteUploadedFiles() {
-        String casesPath = "src/main/resources/TestCase/Upload/temp_cases.yaml";
-        String dataPath = "src/main/resources/TestData/Upload/temp_data.yaml";
         try {
-            Files.deleteIfExists(Path.of(casesPath));
-            Files.deleteIfExists(Path.of(dataPath));
+            Files.deleteIfExists(TEST_CASE_FILE_PATH);
+            Files.deleteIfExists(TEST_DATA_FILE_PATH);
         } catch (Exception e) {
             System.err.println("Could not delete file: " + e.getMessage());
         }
-
     }
 }
