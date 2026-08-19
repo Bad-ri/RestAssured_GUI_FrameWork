@@ -1,6 +1,7 @@
 package View.Componants.MainPanel;
 
 import Controller.Controller;
+import Helper.CurrentSession;
 import View.Componants.ApiPanel.APiSetupPanel;
 import View.Componants.ApiPanel.EnvironmentSetupPanel;
 import View.Componants.ApiPanel.FileUploadPanel;
@@ -15,9 +16,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 /**
- * ActionPanel is strictly responsible for building the action panel GUI components
- * (export/pause/execute controls) and registering event listeners that delegate to the Controller.
- *
+ * ActionPanel is  responsible for building the action panel GUI components*
  * ┌─ Actions ──────────────────────────────────────────────┐
  * │  [Export report] [Export from DB]    [Pause] [Execute] │
  * └────────────────────────────────────────────────────────┘
@@ -27,7 +26,7 @@ public class ActionPanel extends JPanel {
     private JButton export_db_btn;
     private JButton pause_btn;
     private JButton execute_btn;
-
+    private CurrentSession currentSession = CurrentSession.SESSION;
     private String current_tap_selected;
     private final Controller controller;
 
@@ -42,7 +41,6 @@ public class ActionPanel extends JPanel {
             HealthApiSetupPanel healthApiSetupPanel,
             HealthEnvSetupPanel healthEnvPanel) {
 
-        // Initialize the controller with reference to all panels for business logic handling
         this.controller = new Controller(
                 environmentSetupPanel,
                 api_setup_panel,
@@ -64,7 +62,6 @@ public class ActionPanel extends JPanel {
                         new EmptyBorder(5, 5, 5, 5)
                 )
         ));
-
         add(buildLeftControls(), BorderLayout.WEST);
         add(buildRightControls(), BorderLayout.EAST);
     }
@@ -73,9 +70,8 @@ public class ActionPanel extends JPanel {
         JPanel left_controls = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
         export_report_btn = new JButton("Export report");
         export_db_btn = new JButton("Export from DB");
-
-        export_report_btn.addActionListener(e -> controller.takeAction("case_report", current_tap_selected));
-        export_db_btn.addActionListener(e -> controller.takeAction("db_report", current_tap_selected));
+        //export_report_btn.addActionListener(e -> controller.exportReport(current_tap_selected));
+        //export_db_btn.addActionListener(e -> controller.exportDbReport(current_tap_selected));
 
         left_controls.add(export_report_btn);
         left_controls.add(export_db_btn);
@@ -85,15 +81,40 @@ public class ActionPanel extends JPanel {
     private JPanel buildRightControls() {
         JPanel right_controls = new JPanel(new FlowLayout(FlowLayout.RIGHT, 5, 0));
         pause_btn = new JButton("Pause");
+        pause_btn.putClientProperty(FlatClientProperties.STYLE, "background: #1565c0; foreground: #ffffff;");
         execute_btn = new JButton("Execute");
         execute_btn.putClientProperty(FlatClientProperties.STYLE, "background: #2e7d32; foreground: #ffffff;");
 
-        execute_btn.addActionListener(e -> controller.takeAction("execute", current_tap_selected));
-        pause_btn.addActionListener(e -> controller.takeAction("pause", current_tap_selected));
+        execute_btn.addActionListener(e -> {
+            execute_btn.setEnabled(false);
+            new Thread(() -> {
+                try {
+                    controller.executeSession(current_tap_selected);
+                } finally {
+                    SwingUtilities.invokeLater(() -> execute_btn.setEnabled(true));
+                }
+            }).start();
+        });
+        pause_btn.addActionListener(e -> clickPause());
 
         right_controls.add(pause_btn);
         right_controls.add(execute_btn);
         return right_controls;
+    }
+
+    private void clickPause() {
+        if(currentSession.isPause()) {
+            currentSession.setPause(false);
+        }else
+            currentSession.setPause(true);
+        if (currentSession.isPause()) {
+            pause_btn.setText("Resume");
+            pause_btn.putClientProperty(FlatClientProperties.STYLE, "background: #ef6c00; foreground: #ffffff;");
+        } else {
+            pause_btn.setText("Pause");
+            pause_btn.putClientProperty(FlatClientProperties.STYLE, "background: #1565c0; foreground: #ffffff;");
+
+        }
     }
 
     public void set_current_tap(String current_tap) {

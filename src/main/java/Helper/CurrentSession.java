@@ -13,6 +13,8 @@ public enum CurrentSession {
     private boolean hasTestCaseFile;
     private File testDataFile;
     private File testCaseFile;
+    private boolean pause;
+    private boolean execute;
 
     public void set(String bank, String environment, String api, String module, boolean hasTestDataFile, boolean hasTestCaseFile, File testDataFile, File testCaseFile) {
         this.bank = bank;
@@ -24,6 +26,9 @@ public enum CurrentSession {
         this.testDataFile = testDataFile;
         this.testCaseFile = testCaseFile;
     }
+    public void setPause(boolean pause) {
+        this.pause = pause;
+    }
 
     public String getBank() { return bank; }
     public String getEnvironment() { return environment; }
@@ -33,4 +38,5 @@ public enum CurrentSession {
     public boolean hasTestCaseFile() { return hasTestCaseFile; }
     public File getTestDataFile() { return testDataFile; }
     public File getTestCaseFile() { return testCaseFile; }
+    public boolean isPause() { return pause; }
 }

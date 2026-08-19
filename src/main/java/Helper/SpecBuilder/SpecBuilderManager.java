@@ -3,6 +3,7 @@ package Helper.SpecBuilder;
 import Helper.ConfigProvider.ConfigManager;
 import Helper.CurrentSession;
 import Helper.DataProvider.TestDataManager;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
@@ -23,6 +24,7 @@ public class SpecBuilderManager {
                 .setBaseUri(configManager.getApiUrl())
                 .setContentType(ContentType.JSON)
                 .setAccept(ContentType.JSON)
+                .addFilter(new AllureRestAssured())
                 .addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)")
                 .addHeader("Connection", "keep-alive")
                 .setBody(getPayload(testDataName))

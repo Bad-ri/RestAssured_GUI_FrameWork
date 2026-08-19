@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public class SingleExecuter {
+    CurrentSession currentSession = CurrentSession.SESSION;
 
     public void single_runner() {
         FileManager file_manager = new FileManager();
@@ -26,13 +27,29 @@ public class SingleExecuter {
         Fund fund = new Fund();
         TestCasesManager manager = new TestCasesManager();
         List<Map<String, Object>> testCases = manager.getTestCases();
+
         for (int i = 0; i < testCases.size(); i++) {
+            while (currentSession.isPause()) {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    return;
+                }
+            }
             Map<String, Object> tc = testCases.get(i);
             result = tc.get("req_data").toString();
+
+            // Execute API Request
             fund.singleRunner(specBuilderManager.getRequestSpec(result));
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                return;
+            }
         }
-
     }
-
 
 }

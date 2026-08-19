@@ -6,3 +6,19 @@
    title: "NBE-regression-FUND"
    req_data: "invalid_nbe_account"
    expected_status: 00000
+ - id: "TC01"
+   title: "NBE-regression-FUND"
+   req_data: "invalid_nbe_account"
+   expected_status: 00000
+ - id: "TC01"
+   title: "NBE-regression-FUND"
+   req_data: "invalid_nbe_account"
+   expected_status: 00000
+ - id: "TC01"
+   title: "NBE-regression-FUND"
+   req_data: "invalid_nbe_account"
+   expected_status: 00000
+ - id: "TC01"
+   title: "NBE-regression-FUND"
+   req_data: "invalid_nbe_account"
+   expected_status: 00000
