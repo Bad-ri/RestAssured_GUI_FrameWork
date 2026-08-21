@@ -1,6 +1,6 @@
 package Helper.FileManager;
 
-import Helper.CurrentSession;
+import Helper.EnumManager.CurrentSession;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;

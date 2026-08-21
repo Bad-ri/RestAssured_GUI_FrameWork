@@ -11,20 +11,20 @@ REST Assured API testing engine with a Swing GUI runner, built on MVC (UI) + Ser
 ![Java](https://img.shields.io/badge/Java-17+-orange)
 ![RestAssured](https://img.shields.io/badge/RestAssured-5.4-green)
 ![TestNG](https://img.shields.io/badge/TestNG-7.9-blue)
-![Allure](https://img.shields.io/badge/Reports-Allure-red)
+![Reports](https://img.shields.io/badge/Reports-Custom%20HTML-blue)
 ![Status](https://img.shields.io/badge/status-in%20development-yellow)
 ---
 Architecture
 ```mermaid
 flowchart TD
     A["View<br/>Swing GUI"] --> B["Controller<br/>MainController"]
-    B -->|Execute click| C["Engine<br/>TestNGRunner"]
+    B -->|Execute click| C["Engine<br/>SingleExecuter"]
     C --> D["Service Layer<br/>(Service Object Model)"]
     D --> E["RestAssured Core"]
     E --> F[("CBE / NBE APIs")]
     C --> G["GuiProgressListener"]
     G --> A
-    C --> H[("Allure Results")]
+    C --> H["ReportManager<br/>Custom HTML Report"]
     I["Config Manager"] --> D
     J["Data Provider"] --> D
 ```
@@ -42,12 +42,12 @@ sequenceDiagram
     U->>V: Click Execute
     V->>C: Collect env / bank / API / data
     C->>E: run(ExecutionContext)
-    E->>S: Invoke via TestNG DataProvider
+    E->>S: Build request from selected test data
     S->>R: Build & send request
     R->>API: HTTP call
     API-->>R: Response
     R-->>S: Validate response
     S-->>E: Pass / Fail
     E-->>V: Live progress update
-    E->>E: Write Allure results
+    E->>E: Record request/response and export HTML report
 ```

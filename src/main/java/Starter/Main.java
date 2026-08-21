@@ -1,6 +1,5 @@
 package Starter;
 
-import Helper.CurrentSession;
 import View.MainFrame;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import javax.swing.*;

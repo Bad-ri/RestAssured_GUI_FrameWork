@@ -1,9 +1,8 @@
 package Helper.DataProvider;
 
-import Helper.CurrentSession;
+import Helper.EnumManager.CurrentSession;
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Map;

@@ -1,30 +1,41 @@
 package Helper.SpecBuilder;
 
 import Helper.ConfigProvider.ConfigManager;
-import Helper.CurrentSession;
+import Helper.EnumManager.CurrentSession;
 import Helper.DataProvider.TestDataManager;
-import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
-import java.io.IOException;
+
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Map;
 
 /**
  * Builds the REST Assured request specification for the current API req
  */
 public class SpecBuilderManager {
+    private static final String PAYLOAD_DIRECTORY = "src/main/resources/Payload/NBE/";
     private final CurrentSession currentSession = CurrentSession.SESSION;
+    PrintStream logStream;
+    {
+        try {
+            logStream = new PrintStream(new FileOutputStream(new File("target/api_execution.log"), true));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public RequestSpecification getRequestSpec(String testDataName) {
-        ConfigManager configManager = new ConfigManager();
         return new RequestSpecBuilder()
-                .setBaseUri(configManager.getApiUrl())
+                .setBaseUri(new ConfigManager().getApiUrl())
                 .setContentType(ContentType.JSON)
                 .setAccept(ContentType.JSON)
-                .addFilter(new AllureRestAssured())
+                //.addFilter(new ApiReportFilter())
+                .addFilter(new RequestLoggingFilter(logStream))  // Automatically logs all requests
+                .addFilter(new ResponseLoggingFilter(logStream))
                 .addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)")
                 .addHeader("Connection", "keep-alive")
                 .setBody(getPayload(testDataName))
@@ -32,25 +43,23 @@ public class SpecBuilderManager {
                 .build();
     }
 
-    public String getPayload(String testDataName) {
-        Path payloadPath = Path.of("src/main/resources/Payload/NBE/"
-                + currentSession.getApi().toLowerCase() + ".json");
+    private String getPayload(String testDataName) {
+        Path payloadPath = Path.of(PAYLOAD_DIRECTORY + currentSession.getApi().toLowerCase() + ".json");
         try {
-            String payload = Files.readString(payloadPath);
-            return payloadBuilder(payload, testDataName);
+            return payloadBuilder(Files.readString(payloadPath), testDataName);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Unable to read payload: " + payloadPath, e);
         }
     }
 
-    public String payloadBuilder(String requestBody, String testDataName) {
+    private String payloadBuilder(String requestBody, String testDataName) {
         return requestBody
                 .replace("${description}", getTestData(testDataName))
                 .replace("${title}", "titleya3sl");
     }
 
-    public String getTestData(String testDataName) {
+    private String getTestData(String testDataName) {
         return new TestDataManager(testDataName).getTestData().get("description");
-        }
+    }
 
 }

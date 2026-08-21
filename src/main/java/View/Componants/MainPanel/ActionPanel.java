@@ -1,7 +1,8 @@
 package View.Componants.MainPanel;
 
 import Controller.Controller;
-import Helper.CurrentSession;
+import Helper.EnumManager.CurrentSession;
+import Helper.ReportManager.ReportManager;
 import View.Componants.ApiPanel.APiSetupPanel;
 import View.Componants.ApiPanel.EnvironmentSetupPanel;
 import View.Componants.ApiPanel.FileUploadPanel;
@@ -70,8 +71,8 @@ public class ActionPanel extends JPanel {
         JPanel left_controls = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
         export_report_btn = new JButton("Export report");
         export_db_btn = new JButton("Export from DB");
-        //export_report_btn.addActionListener(e -> controller.exportReport(current_tap_selected));
-        //export_db_btn.addActionListener(e -> controller.exportDbReport(current_tap_selected));
+        export_report_btn.addActionListener(e -> ReportManager.generateHtmlReport());
+        export_db_btn.addActionListener(e -> controller.exportDbReport(current_tap_selected));
 
         left_controls.add(export_report_btn);
         left_controls.add(export_db_btn);
