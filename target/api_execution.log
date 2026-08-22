@@ -1796,3 +1796,245 @@ alt-svc: h3=":443"; ma=86400
     "image": "http://example.com",
     "category": "string"
 }
+Request method:	POST
+Request URI:	https://fakestoreapi.com/products
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
+				Connection=keep-alive
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": 2,
+    "title": "titleya3sl",
+    "price": 0.1,
+    "description": "NNNBBBEEE-valid-notUploaded",
+    "category": "string",
+    "image": "http://example.com"
+}
+Request method:	POST
+Request URI:	https://fakestoreapi.com/products
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
+				Connection=keep-alive
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": 2,
+    "title": "titleya3sl",
+    "price": 0.1,
+    "description": "NNNBBBEEE-valid-notUploaded",
+    "category": "string",
+    "image": "http://example.com"
+}
+Request method:	POST
+Request URI:	https://fakestoreapi.com/products
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
+				Connection=keep-alive
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": 2,
+    "title": "titleya3sl",
+    "price": 0.1,
+    "description": "NNNBBBEEE-valid-notUploaded",
+    "category": "string",
+    "image": "http://example.com"
+}
+Request method:	POST
+Request URI:	https://fakestoreapi.com/products
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
+				Connection=keep-alive
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": 2,
+    "title": "titleya3sl",
+    "price": 0.1,
+    "description": "NNNBBBEEE-valid-notUploaded",
+    "category": "string",
+    "image": "http://example.com"
+}
+Request method:	POST
+Request URI:	https://fakestoreapi.com/products
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
+				Connection=keep-alive
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": 2,
+    "title": "titleya3sl",
+    "price": 0.1,
+    "description": "NNNBBBEEE-valid-notUploaded",
+    "category": "string",
+    "image": "http://example.com"
+}
+Request method:	POST
+Request URI:	https://fakestoreapi.com/products
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
+				Connection=keep-alive
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": 2,
+    "title": "titleya3sl",
+    "price": 0.1,
+    "description": "NNNBBBEEE-valid-notUploaded",
+    "category": "string",
+    "image": "http://example.com"
+}
+Request method:	POST
+Request URI:	https://fakestoreapi.com/products
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
+				Connection=keep-alive
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": 2,
+    "title": "titleya3sl",
+    "price": 0.1,
+    "description": "NNNBBBEEE-valid-notUploaded",
+    "category": "string",
+    "image": "http://example.com"
+}
+Request method:	POST
+Request URI:	https://fakestoreapi.com/products
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
+				Connection=keep-alive
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": 2,
+    "title": "titleya3sl",
+    "price": 0.1,
+    "description": "NNNBBBEEE-valid-notUploaded",
+    "category": "string",
+    "image": "http://example.com"
+}
+Request method:	POST
+Request URI:	https://fakestoreapi.com/products
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
+				Connection=keep-alive
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": 2,
+    "title": "titleya3sl",
+    "price": 0.1,
+    "description": "NNNBBBEEE-valid-notUploaded",
+    "category": "string",
+    "image": "http://example.com"
+}
+Request method:	POST
+Request URI:	https://fakestoreapi.com/products
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
+				Connection=keep-alive
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": 2,
+    "title": "titleya3sl",
+    "price": 0.1,
+    "description": "NNNBBBEEE-valid-notUploaded",
+    "category": "string",
+    "image": "http://example.com"
+}
+Request method:	POST
+Request URI:	https://fakestoreapi.com/products
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=application/json, application/javascript, text/javascript, text/json
+				User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
+				Connection=keep-alive
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": 2,
+    "title": "titleya3sl",
+    "price": 0.1,
+    "description": "NNNBBBEEE-valid-notUploaded",
+    "category": "string",
+    "image": "http://example.com"
+}

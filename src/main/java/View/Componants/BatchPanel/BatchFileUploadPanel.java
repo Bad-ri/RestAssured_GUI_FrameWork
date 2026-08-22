@@ -16,8 +16,8 @@ public class BatchFileUploadPanel extends JPanel {
     private static final String PAYLOAD = "Payload";
     private static final String DATA = "Data";
     private static final int MAX_NAME_LENGTH = 7;
-    private JButton test_data_button;
-    private File test_data_file;
+    private JButton data_button;
+    private File data_file;
     private JRadioButton payload_radio;
     private JRadioButton data_radio;
     public BatchFileUploadPanel() {
@@ -36,15 +36,15 @@ public class BatchFileUploadPanel extends JPanel {
         JLabel label = new JLabel("data :");
         label.setPreferredSize(new Dimension(50, 22));
         row1.add(label);
-        test_data_button = createUploadButton();
-        test_data_button.addActionListener(e -> {
+        data_button = createUploadButton();
+        data_button.addActionListener(e -> {
             File selected = chooseFile();
             if (selected != null) {
-                test_data_file = selected;
-                setButtonFileText(test_data_button, test_data_file);
+                data_file = selected;
+                setButtonFileText(data_button, data_file);
             }
         });
-        row1.add(test_data_button);
+        row1.add(data_button);
         return row1;
     }
     private JPanel buildModulePanel() {
@@ -52,6 +52,7 @@ public class BatchFileUploadPanel extends JPanel {
         module_panel.setAlignmentX(Component.LEFT_ALIGNMENT);
         payload_radio = new JRadioButton(PAYLOAD, true);
         data_radio = new JRadioButton(DATA);
+        data_radio.setEnabled(false);
         ButtonGroup bank_group = new ButtonGroup();
         bank_group.add(payload_radio);
         bank_group.add(data_radio);
@@ -83,14 +84,14 @@ public class BatchFileUploadPanel extends JPanel {
         return null;
     }
     public void clearUploadButton() {
-        this.test_data_file = null;
-        this.test_data_button.setText("Upload");
-        this.test_data_button.setToolTipText(null);
+        this.data_file = null;
+        this.data_button.setText("Upload");
+        this.data_button.setToolTipText(null);
         revalidate();
         repaint();
     }
-    public File getTest_data_file() {
-        return test_data_file;
+    public File getData_file() {
+        return data_file;
     }
     public String getSelectedModule() {
         return payload_radio.isSelected() ? PAYLOAD : DATA;

@@ -98,17 +98,19 @@ public class ActionPanel extends JPanel {
             execute_btn.setEnabled(false);
             export_report_btn.setEnabled(false);
             pause_btn.setEnabled(true);
-            new Thread(() -> {
-                try {
+
+            new SwingWorker<Void, Void>() {
+                protected Void doInBackground(){
                     controller.executeSession(current_tap_selected);
-                } finally {
-                    SwingUtilities.invokeLater(() -> {
-                        execute_btn.setEnabled(true);
-                        export_report_btn.setEnabled(true);
-                        pause_btn.setEnabled(false);
-                    });
+                    return null;
                 }
-            }).start();
+                protected void done() {
+                    execute_btn.setEnabled(true);
+                    export_report_btn.setEnabled(true);
+                    pause_btn.setEnabled(false);
+                }
+            }.execute();
+
         });
         pause_btn.addActionListener(e -> clickPause());
 

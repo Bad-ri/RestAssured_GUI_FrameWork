@@ -14,18 +14,10 @@ public class SingleBuilder {
 
     public void single_runner() {
         FileManager file_manager = new FileManager();
-        executeTestCases();
-    }
-    public void health_runner(String selectedEnvironment, String selectedBank, String selectedApi) {
-        //printSessionParameters(selectedEnvironment, selectedBank, selectedApi);
-    }
-
-    public void executeTestCases() {
         SpecBuilderManager specBuilderManager = new SpecBuilderManager();
         RequestSender fund = new RequestSender();
         TestCasesManager manager = new TestCasesManager();
         List<Map<String, Object>> testCases = manager.getTestCases();
-
         for (int i = 0; i < testCases.size(); i++) {
             while (userSelection.isPause()) {
                 try {
@@ -38,8 +30,11 @@ public class SingleBuilder {
             Map<String, Object> tc = testCases.get(i);
             String requestData = String.valueOf(tc.get("req_data"));
             fund.sendRequest(specBuilderManager.getRequestSpec(requestData));
-
         }
     }
+    public void health_runner() {
+        
+    }
+
 
 }

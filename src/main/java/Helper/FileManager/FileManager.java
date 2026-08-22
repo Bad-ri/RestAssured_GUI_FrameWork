@@ -2,6 +2,7 @@ package Helper.FileManager;
 
 import Helper.EnumManager.UserSelection;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
@@ -42,6 +43,13 @@ public class FileManager {
             Files.deleteIfExists(TEST_DATA_FILE_PATH);
         } catch (Exception e) {
             System.err.println("Could not delete file: " + e.getMessage());
+        }
+    }
+    public String convertYamlToString(String filePath) {
+        try {
+            return Files.readString(Path.of(filePath));
+        } catch (IOException e) {
+            return null;
         }
     }
 }

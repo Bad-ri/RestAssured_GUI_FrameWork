@@ -1,0 +1,4 @@
+- id: "TC01"
+  title: "CBE-sanity-FUND"
+  req_data: "valid_cbe_account"
+  expected_status: 00000
