@@ -2,7 +2,7 @@ package Helper.EnumManager;
 
 import java.io.File;
 
-public enum CurrentSession {
+public enum UserSelection {
     SESSION;
 
     private String bank;

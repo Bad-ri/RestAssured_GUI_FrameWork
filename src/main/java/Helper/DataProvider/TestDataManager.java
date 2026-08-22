@@ -1,6 +1,6 @@
 package Helper.DataProvider;
 
-import Helper.EnumManager.CurrentSession;
+import Helper.EnumManager.UserSelection;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.FileInputStream;
@@ -11,12 +11,12 @@ import java.util.Map;
  * Loads test data file
  */
 public class TestDataManager {
-    private final CurrentSession currentSession = CurrentSession.SESSION;
+    private final UserSelection userSelection = UserSelection.SESSION;
     private Map<String, String> testData;
     private String configPath;
 
     public TestDataManager(String selectedData) {
-        if (currentSession.hasTestDataFile()) {
+        if (userSelection.hasTestDataFile()) {
             configPath = "src/main/resources/TestData/Upload/temp_data.yaml";
         } else {
             setConfig_path();
@@ -25,7 +25,7 @@ public class TestDataManager {
     }
 
     public void setConfig_path() {
-        String bank = currentSession.getBank().toUpperCase();
+        String bank = userSelection.getBank().toUpperCase();
         configPath = "src/main/resources/TestData/" + bank + "/" + bank + ".yaml";
     }
 

@@ -2,7 +2,7 @@ package Controller;
 
 import Engine.BatchBuilder;
 import Engine.SingleBuilder;
-import Helper.EnumManager.CurrentSession;
+import Helper.EnumManager.UserSelection;
 import View.Componants.ApiPanel.APiSetupPanel;
 import View.Componants.ApiPanel.EnvironmentSetupPanel;
 import View.Componants.ApiPanel.FileUploadPanel;
@@ -21,7 +21,7 @@ import java.io.File;
 public class Controller {
     private SingleBuilder single_executer;
     private BatchBuilder batch_executer;
-    private final CurrentSession currentSession = CurrentSession.SESSION;
+    private final UserSelection userSelection = UserSelection.SESSION;
 
     // View Panel references for data extraction and control
     private EnvironmentSetupPanel environment_setup_panel;
@@ -118,7 +118,7 @@ public class Controller {
     public void executeSession(String currentTab) {
         switch (currentTab) {
             case "SINGLE_API":
-                    CurrentSession.SESSION.set(
+                    UserSelection.SESSION.set(
                             environment_setup_panel.getSelectedBank(),
                             environment_setup_panel.getSelectedEnvironment(),
                             api_setup_panel.getSelectedApi(),

@@ -1,6 +1,6 @@
 package Helper.ConfigProvider;
 
-import Helper.EnumManager.CurrentSession;
+import Helper.EnumManager.UserSelection;
 import org.yaml.snakeyaml.Yaml;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -11,7 +11,7 @@ import java.util.Map;
  */
 
 public class ConfigManager {
-    private final CurrentSession currentSession = CurrentSession.SESSION;
+    private final UserSelection userSelection = UserSelection.SESSION;
     private final Map<String, Map<String, String>> environmentMap;
     private String configPath;
 
@@ -22,7 +22,7 @@ public class ConfigManager {
 
     public void setConfig_path() {
         configPath = "src/main/resources/Configuration/"
-                + currentSession.getEnvironment().toLowerCase() + "Config.YAML";
+                + userSelection.getEnvironment().toLowerCase() + "Config.YAML";
     }
 
     private Map<String, Map<String, String>> loadConfiguration() {
@@ -36,8 +36,8 @@ public class ConfigManager {
      * return API URL
      */
     public String getApiUrl() {
-        Map<String, String> bankConfiguration = environmentMap.get(currentSession.getBank().toLowerCase());
-        String api = currentSession.getApi().toLowerCase();
+        Map<String, String> bankConfiguration = environmentMap.get(userSelection.getBank().toLowerCase());
+        String api = userSelection.getApi().toLowerCase();
         String apiUrl = bankConfiguration.get(api + "_url");
         if (api.toLowerCase().equals("auth")) {
             return apiUrl.concat("||" + bankConfiguration.get("list_url"));

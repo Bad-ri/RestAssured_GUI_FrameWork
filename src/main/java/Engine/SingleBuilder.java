@@ -1,16 +1,16 @@
 package Engine;
 
-import Helper.EnumManager.CurrentSession;
+import Helper.EnumManager.UserSelection;
 import Helper.FileManager.FileManager;
 import Helper.SpecBuilder.SpecBuilderManager;
 import Helper.TestCaseProvider.TestCasesManager;
-import Service.SingleRunner;
+import Service.RequestSender;
 
 import java.util.List;
 import java.util.Map;
 
 public class SingleBuilder {
-    CurrentSession currentSession = CurrentSession.SESSION;
+    UserSelection userSelection = UserSelection.SESSION;
 
     public void single_runner() {
         FileManager file_manager = new FileManager();
@@ -22,12 +22,12 @@ public class SingleBuilder {
 
     public void executeTestCases() {
         SpecBuilderManager specBuilderManager = new SpecBuilderManager();
-        SingleRunner fund = new SingleRunner();
+        RequestSender fund = new RequestSender();
         TestCasesManager manager = new TestCasesManager();
         List<Map<String, Object>> testCases = manager.getTestCases();
 
         for (int i = 0; i < testCases.size(); i++) {
-            while (currentSession.isPause()) {
+            while (userSelection.isPause()) {
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
@@ -37,7 +37,7 @@ public class SingleBuilder {
             }
             Map<String, Object> tc = testCases.get(i);
             String requestData = String.valueOf(tc.get("req_data"));
-            fund.singleRunner(specBuilderManager.getRequestSpec(requestData));
+            fund.sendRequest(specBuilderManager.getRequestSpec(requestData));
 
         }
     }

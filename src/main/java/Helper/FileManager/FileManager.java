@@ -1,6 +1,6 @@
 package Helper.FileManager;
 
-import Helper.EnumManager.CurrentSession;
+import Helper.EnumManager.UserSelection;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -10,7 +10,7 @@ import java.nio.file.StandardCopyOption;
  * Save uploaded file & delete old files
  */
 public class FileManager {
-    private final CurrentSession session = CurrentSession.SESSION;
+    private final UserSelection session = UserSelection.SESSION;
     private static final Path TEST_DATA_UPLOAD_DIRECTORY =
             Path.of("src", "main", "resources", "TestData", "Upload");
     private static final Path TEST_CASE_UPLOAD_DIRECTORY =

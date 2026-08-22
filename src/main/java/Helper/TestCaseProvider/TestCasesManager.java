@@ -1,6 +1,6 @@
 package Helper.TestCaseProvider;
 
-import Helper.EnumManager.CurrentSession;
+import Helper.EnumManager.UserSelection;
 import org.yaml.snakeyaml.Yaml;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -11,12 +11,12 @@ import java.util.Map;
  * Loads the test cases file
  */
 public class TestCasesManager {
-    private final CurrentSession currentSession = CurrentSession.SESSION;
+    private final UserSelection userSelection = UserSelection.SESSION;
     private final List<Map<String, Object>> testCases;
     private String configPath;
 
     public TestCasesManager() {
-        if (currentSession.hasTestCaseFile()) {
+        if (userSelection.hasTestCaseFile()) {
             configPath = "src/main/resources/TestCase/Upload/temp_cases.yaml";
         } else {
             setConfig_path();
@@ -25,9 +25,9 @@ public class TestCasesManager {
     }
     public void setConfig_path() {
         configPath = "src/main/resources/TestCase/"
-                + currentSession.getBank().toUpperCase() + "/"
-                + currentSession.getModule().toUpperCase() + "/"
-                + currentSession.getApi().toUpperCase() + ".YAML";
+                + userSelection.getBank().toUpperCase() + "/"
+                + userSelection.getModule().toUpperCase() + "/"
+                + userSelection.getApi().toUpperCase() + ".YAML";
     }
     private List<Map<String, Object>> loadTestCases() {
         try (InputStream inputStream = new FileInputStream(configPath)) {

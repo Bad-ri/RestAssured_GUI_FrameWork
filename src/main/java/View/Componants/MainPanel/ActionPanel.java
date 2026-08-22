@@ -1,7 +1,7 @@
 package View.Componants.MainPanel;
 
 import Controller.Controller;
-import Helper.EnumManager.CurrentSession;
+import Helper.EnumManager.UserSelection;
 import Helper.ReportManager.ReportManager;
 import View.Componants.ApiPanel.APiSetupPanel;
 import View.Componants.ApiPanel.EnvironmentSetupPanel;
@@ -27,7 +27,7 @@ public class ActionPanel extends JPanel {
     private JButton export_db_btn;
     private JButton pause_btn;
     private JButton execute_btn;
-    private CurrentSession currentSession = CurrentSession.SESSION;
+    private UserSelection userSelection = UserSelection.SESSION;
     private String current_tap_selected;
     private final Controller controller;
 
@@ -71,8 +71,14 @@ public class ActionPanel extends JPanel {
         JPanel left_controls = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
         export_report_btn = new JButton("Export report");
         export_db_btn = new JButton("Export from DB");
+        export_db_btn.setEnabled(false);
+        //7eb6b1 BLUE
+        //fc7046
+        //ef5554
+        export_report_btn.putClientProperty(FlatClientProperties.STYLE, "background: #fc7046; foreground: #ffffff;");
         export_report_btn.addActionListener(e -> ReportManager.generateHtmlReport());
-        export_db_btn.addActionListener(e -> controller.exportDbReport(current_tap_selected));
+        export_report_btn.setEnabled(false);
+        //export_db_btn.addActionListener(e -> controller.exportDbReport(current_tap_selected));
 
         left_controls.add(export_report_btn);
         left_controls.add(export_db_btn);
@@ -83,16 +89,24 @@ public class ActionPanel extends JPanel {
         JPanel right_controls = new JPanel(new FlowLayout(FlowLayout.RIGHT, 5, 0));
         pause_btn = new JButton("Pause");
         pause_btn.putClientProperty(FlatClientProperties.STYLE, "background: #1565c0; foreground: #ffffff;");
+        pause_btn.setEnabled(false);
+
         execute_btn = new JButton("Execute");
         execute_btn.putClientProperty(FlatClientProperties.STYLE, "background: #2e7d32; foreground: #ffffff;");
 
         execute_btn.addActionListener(e -> {
             execute_btn.setEnabled(false);
+            export_report_btn.setEnabled(false);
+            pause_btn.setEnabled(true);
             new Thread(() -> {
                 try {
                     controller.executeSession(current_tap_selected);
                 } finally {
-                    SwingUtilities.invokeLater(() -> execute_btn.setEnabled(true));
+                    SwingUtilities.invokeLater(() -> {
+                        execute_btn.setEnabled(true);
+                        export_report_btn.setEnabled(true);
+                        pause_btn.setEnabled(false);
+                    });
                 }
             }).start();
         });
@@ -104,11 +118,11 @@ public class ActionPanel extends JPanel {
     }
 
     private void clickPause() {
-        if(currentSession.isPause()) {
-            currentSession.setPause(false);
+        if(userSelection.isPause()) {
+            userSelection.setPause(false);
         }else
-            currentSession.setPause(true);
-        if (currentSession.isPause()) {
+            userSelection.setPause(true);
+        if (userSelection.isPause()) {
             pause_btn.setText("Resume");
             pause_btn.putClientProperty(FlatClientProperties.STYLE, "background: #ef6c00; foreground: #ffffff;");
         } else {

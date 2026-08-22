@@ -11,15 +11,12 @@ public class ReportManager {
 
     private static final List<String> reportRows = new ArrayList<>();
 
-    private ReportManager() {}
-
-    public static void recordExchange(String transactionId, int statusCode, long durationMs) {
-        String statusClass = (statusCode >= 200 && statusCode < 400) ? "pass" : "fail";
-
+    public static void recordExchange(String transactionId, String statusCode) {
+        //String statusClass = (statusCode >= 200 && statusCode < 400) ? "pass" : "fail";
+        // + "<td class='" + statusClass + "'>" + statusCode + "</td>"
         String row = "<tr>"
                 + "<td>" + transactionId + "</td>"
-                + "<td class='" + statusClass + "'>" + statusCode + "</td>"
-                + "<td>" + durationMs + " ms</td>"
+                + "<td>"+ statusCode + "</td>"
                 + "</tr>";
 
         reportRows.add(row);
@@ -46,7 +43,7 @@ public class ReportManager {
 
         html.append("<h2>API Execution Summary</h2>");
         html.append("<table>");
-        html.append("<tr><th>Transaction ID</th><th>Status Code</th><th>Duration</th></tr>");
+        html.append("<tr><th>Transaction ID</th><th>Status Code</th></tr>");
 
         for (String row : reportRows) {
             html.append(row);
